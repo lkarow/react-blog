@@ -8,7 +8,7 @@ export default function CreatePost({ isAuth }) {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   // Reference to the collection in firebase
   const postsCollectionRef = collection(db, 'posts');
@@ -57,6 +57,9 @@ export default function CreatePost({ isAuth }) {
           onClick={createPost}
         >
           Submit
+        </button>
+        <button className="create-post__btn" onClick={() => navigate('/')}>
+          Cancel
         </button>
       </div>
     </div>
