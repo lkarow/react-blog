@@ -13,6 +13,7 @@ describe('<Post /> component', () => {
       </BrowserRouter>
     );
     expect(screen.getByText('Edit Post')).toBeInTheDocument();
+    expect(screen.getByText('Edit Post')).toHaveAttribute('href', '/edit');
     expect(screen.getByText('Delete Post')).toBeInTheDocument();
   });
 
