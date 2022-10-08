@@ -3,6 +3,16 @@ import { BrowserRouter } from 'react-router-dom';
 import Navbar from '../components/navbar/Navbar';
 
 describe('<Navbar /> component', () => {
+  it('render Home link', () => {
+    render(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
+    expect(screen.getByText('Home')).toBeInTheDocument();
+    expect(screen.getByText('Home')).toHaveAttribute('href', '/');
+  });
+
   it('render Create Post link if user is logged in', () => {
     render(
       <BrowserRouter>
@@ -10,6 +20,7 @@ describe('<Navbar /> component', () => {
       </BrowserRouter>
     );
     expect(screen.getByText('Create post')).toBeInTheDocument();
+    expect(screen.getByText('Create post')).toHaveAttribute('href', '/create');
   });
 
   it('do not render Create Post link if user is not logged in', () => {
