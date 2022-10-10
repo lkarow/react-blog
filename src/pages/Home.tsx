@@ -3,17 +3,39 @@ import { getDocs, collection, doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../firebase-config';
 import Post from '../components/post/Post';
 
-export default function Home({ isAuth }) {
-  const [postLists, setPostLists] = useState([]);
+type PostType = {
+  id: string;
+  title?: string;
+  text?: string;
+  author?: {
+    id: string;
+  };
+};
+
+type Props = {
+  isAuth: boolean;
+};
+
+export default function Home({ isAuth }: Props) {
+  const [postLists, setPostLists] = useState<PostType[]>([
+    {
+      id: '',
+      title: '',
+      text: '',
+      author: {
+        id: '',
+      },
+    },
+  ]);
 
   const postsCollectionRef = collection(db, 'posts');
 
-  const getPosts = async () => {
+  const getPosts = async (): Promise<void> => {
     const data = await getDocs(postsCollectionRef);
     setPostLists(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
-  const deletePost = async (id) => {
+  const deletePost = async (id: string): Promise<void> => {
     await deleteDoc(doc(db, 'posts', id));
     getPosts();
   };

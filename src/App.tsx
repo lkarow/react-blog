@@ -11,10 +11,10 @@ import './App.css';
 function App() {
   const [isAuth, setIsAuth] = useState(false);
 
-  const signIn = () => {
+  const signIn = (): void => {
     signInAnonymously(auth)
       .then(() => {
-        localStorage.setItem('isAuth', true);
+        localStorage.setItem('isAuth', 'true');
         setIsAuth(true);
       })
       .catch((error) => {
@@ -25,20 +25,15 @@ function App() {
       });
   };
 
-  const logOut = () => {
+  const logOut = (): void => {
     signOut(auth);
-    localStorage.setItem('isAuth', false);
+    localStorage.setItem('isAuth', 'false');
     setIsAuth(false);
   };
 
   return (
     <BrowserRouter>
-      <Navbar
-        isAuth={isAuth}
-        setIsAuth={setIsAuth}
-        signIn={signIn}
-        logOut={logOut}
-      />
+      <Navbar isAuth={isAuth} signIn={signIn} logOut={logOut} />
       <Routes>
         <Route path="/" element={<Home isAuth={isAuth} />} />
         <Route path="/create" element={<CreatePost isAuth={isAuth} />} />

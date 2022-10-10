@@ -3,14 +3,20 @@ import { Link } from 'react-router-dom';
 import ConfirmDialog from '../confirmDialog/ConfirmDialog';
 import './Post.css';
 
-export default function Post({ post, deletePost, isAuth }) {
+type Props = {
+  post: any;
+  deletePost: any;
+  isAuth: boolean;
+};
+
+export default function Post({ post, deletePost, isAuth }: Props) {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  const toggleShowConfirmDialog = () => {
+  const toggleShowConfirmDialog = (): void => {
     setShowConfirmDialog(!showConfirmDialog);
   };
 
-  const handleDelete = (choose, id) => {
+  const handleDelete = (choose: boolean, id: string): void => {
     if (choose) deletePost(id);
     toggleShowConfirmDialog();
   };

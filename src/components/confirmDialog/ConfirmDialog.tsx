@@ -1,8 +1,13 @@
 import React from 'react';
 import './ConfirmDialog.css';
 
-export default function ConfirmDialog({ handleDelete, postId }) {
-  const handleClick = (boolean) => {
+type Props = {
+  handleDelete: any;
+  postId: string;
+};
+
+export default function ConfirmDialog({ handleDelete, postId }: Props) {
+  const handleClick = (boolean: boolean): void => {
     handleDelete(boolean, postId);
   };
 

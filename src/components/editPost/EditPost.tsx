@@ -4,11 +4,20 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../firebase-config';
 import './EditPost.css';
 
+type PostType = {
+  id: string;
+  title: string;
+  text: string;
+  author: {
+    id: string;
+  };
+};
+
 export default function EditPost() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { post } = location.state;
+  const { post }: any = location.state as PostType;
 
   const [title, setTitle] = useState(post.title);
   const [text, setText] = useState(post.text);
@@ -16,16 +25,16 @@ export default function EditPost() {
   // Reference to the collection in firebase
   const postRef = doc(db, 'posts', post.id);
 
-  const handleChangePost = (inupt, category) => {
-    if (category === 'title') setTitle(inupt);
-    if (category === 'text') setText(inupt);
+  const handleChangePost = (input: any, category: string): void => {
+    if (category === 'title') setTitle(input);
+    if (category === 'text') setText(input);
   };
 
-  const navigateToHome = () => {
+  const navigateToHome = (): void => {
     navigate('/');
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     await updateDoc(postRef, {
       title: title,
       text: text,
@@ -49,8 +58,8 @@ export default function EditPost() {
           <label htmlFor="edit-post__textarea">Text:</label>
           <textarea
             id="edit-post__textarea"
-            rows="10"
-            cols="40"
+            rows={10}
+            cols={40}
             value={text}
             onChange={(e) => handleChangePost(e.target.value, 'text')}
           />

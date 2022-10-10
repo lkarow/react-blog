@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { auth, db } from '../firebase-config';
 import { useNavigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
 import './CreatePost.css';
 
-export default function CreatePost({ isAuth }) {
+type Props = {
+  isAuth: boolean;
+};
+
+export default function CreatePost({ isAuth }: Props) {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
 
@@ -13,21 +18,27 @@ export default function CreatePost({ isAuth }) {
   // Reference to the collection in firebase
   const postsCollectionRef = collection(db, 'posts');
 
-  const createPost = async () => {
+  // Get current user uid
+  let userUid: string;
+  onAuthStateChanged(auth, (user) => {
+    if (user) userUid = user.uid;
+  });
+
+  const createPost = async (): Promise<void> => {
     await addDoc(postsCollectionRef, {
       title,
       text,
-      author: { id: auth.currentUser.uid },
+      author: { id: userUid },
     });
     navigate('/');
   };
 
   // Check if user is authenticated
-  useEffect(() => {
+  useEffect((): void => {
     if (!isAuth) {
-      navigate('/login');
+      navigate('/');
     }
-  });
+  }, []);
 
   return (
     <div className="create-post-page" data-testid="create-post-page">
@@ -45,8 +56,8 @@ export default function CreatePost({ isAuth }) {
           <label htmlFor="create-post__textarea">Text:</label>
           <textarea
             id="create-post__textarea"
-            rows="10"
-            cols="40"
+            rows={10}
+            cols={40}
             placeholder="Text"
             onChange={(e) => setText(e.target.value)}
           />

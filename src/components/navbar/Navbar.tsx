@@ -2,7 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 
-export default function navbar({ isAuth, signIn, logOut }) {
+type Props = {
+  isAuth: boolean;
+  signIn: any;
+  logOut: any;
+};
+
+export default function navbar({ isAuth, signIn, logOut }: Props) {
   return (
     <nav className="navbar" role="navigation">
       <ul className="nav">
