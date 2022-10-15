@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import ConfirmDialog from '../confirmDialog/ConfirmDialog';
 import './Post.css';
 
@@ -30,7 +31,7 @@ export default function Post({ post, deletePost, isAuth }: Props) {
         <div className="post-container">
           <article>
             <h2 className="post-title">{post.title}</h2>
-            <p className="post-text">{post.text}</p>
+            <ReactMarkdown className="post-text">{post.text}</ReactMarkdown>
           </article>
           {isAuth && (
             <div className="post-controls">
