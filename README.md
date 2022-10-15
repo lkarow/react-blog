@@ -2,7 +2,7 @@
 
 ## Description
 
-Simple blog created with React and Firebase. Users can login anonymously and create, edit and delete posts.
+Simple blog created with React and Firebase. Users can login anonymously and create, edit and delete posts. The posts can be formatted with Markdown.
 
 <image src="./public/react-blog-home.png" width="400px">
 
@@ -12,6 +12,7 @@ Simple blog created with React and Firebase. Users can login anonymously and cre
 - react
 - react-dom
 - react-router-dom
+- [react-markdown](https://github.com/remarkjs/react-markdown)
 
 ## Get the blog running
 
