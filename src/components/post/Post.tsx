@@ -28,12 +28,10 @@ export default function Post({ post, deletePost, isAuth }: Props) {
       )}
       <div className="post">
         <div className="post-container">
-          <div className="post-title-bar">
-            <h2>{post.title}</h2>
-          </div>
-          <div className="post-text-container">
+          <article>
+            <h2 className="post-title">{post.title}</h2>
             <p className="post-text">{post.text}</p>
-          </div>
+          </article>
           {isAuth && (
             <div className="post-controls">
               <Link to="/edit" state={{ post }} className="post-btn">

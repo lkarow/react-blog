@@ -8,14 +8,14 @@
   border-radius: 8px;
 }
 
-.post-title-bar {
+.post-title {
   background-color: var(--primary-color);
   border-radius: 8px 8px 0 0;
   color: var(--secondary-color);
   padding: 10px;
 }
 
-.post-text-container {
+.post-text {
   background-color: var(--secondary-color);
   border: 2px solid var(--primary-color);
   color: var(--primary-color);
